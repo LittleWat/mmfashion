@@ -17,18 +17,19 @@ def parse_args():
         '--input',
         type=str,
         help='input image path',
-        default='demo/imgs/attr_pred_demo1.jpg')
+        # default='demo/imgs/attr_pred_demo1.jpg')
+        default='small_loss_child.png')
     parser.add_argument(
         '--checkpoint',
         type=str,
         help='checkpoint file',
-        default='checkpoint/Predict/vgg/global/latest.pth')
+        default='checkpoint/global_predictor_vgg_attr.pth')
     parser.add_argument(
         '--config',
         help='test config file path',
-        default='configs/attribute_predict/global_predictor_vgg_attr.py')
+        default='configs/attribute_predict_coarse/global_predictor_vgg_attr.py')
     parser.add_argument(
-        '--use_cuda', type=bool, default=True, help='use gpu or not')
+        '--use_cuda', type=bool, default=False, help='use gpu or not')
     args = parser.parse_args()
     return args
 

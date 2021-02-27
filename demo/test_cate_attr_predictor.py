@@ -17,19 +17,21 @@ def parse_args():
         '--input',
         type=str,
         help='input image path',
-        default='demo/imgs/attr_pred_demo2.jpg')
+        # default='demo/imgs/attr_pred_demo1.jpg')
+        # default='demo/imgs/04_1_front.jpg')
+        default='small_loss_child.png')
     parser.add_argument(
         '--checkpoint',
         type=str,
         help='checkpoint file',
-        default='checkpoint/CateAttrPredict/resnet/global/epoch_40.pth')
+        default='checkpoint/test_cate_attr_predictor_res50_global.pth')
     parser.add_argument(
         '--config',
         help='test config file path',
         default='configs/category_attribute_predict/global_predictor_resnet.py'
     )
     parser.add_argument(
-        '--use_cuda', type=bool, default=True, help='use gpu or not')
+        '--use_cuda', type=bool, default=False, help='use gpu or not')
     args = parser.parse_args()
     return args
 
@@ -44,7 +46,7 @@ def main():
     landmark_tensor = torch.zeros(8)
 
     model = build_predictor(cfg.model)
-    load_checkpoint(model, args.checkpoint, map_location='cpu')
+    load_checkpoint(model, args.checkpoint, map_location=torch.device('cpu'))
     print('model loaded from {}'.format(args.checkpoint))
     if args.use_cuda:
         model.cuda()
